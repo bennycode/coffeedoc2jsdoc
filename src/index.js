@@ -1,4 +1,5 @@
 const fs = require('fs');
+const lexer = require('coffee-lex');
 const parser = require('decaffeinate-parser');
 const path = require('path');
 
@@ -26,20 +27,22 @@ function writeFile(file, message) {
   });
 }
 
-const filePath = 'data/ConversationRepository.coffee';
+const filePath = 'data/block-comment.coffee';
 
 readFile(filePath)
   .then((code) => {
-    const program = parser.parse(code);
-    const json = JSON.stringify(program, null, 2);
-    return writeFile('data/output.json', json);
+    const ast = parser.parse(code);
+    const tokens = ast.context.sourceTokens;
+    tokens.forEach((token) => {
+      if (token.type === lexer.SourceType.COMMENT) {
+        if (token.start === 0 && source[1] === '!') {
+          console.log('shebang comment', token);
+        } else {
+          console.log('line comment', token);
+        }
+      } else if (token.type === lexer.SourceType.HERECOMMENT) {
+        console.log('block comment', token);
+      }
+    });
   })
   .catch(console.error);
-
-/*
- let program = parse('add = (a, b) -> a + b');
- let assignment = program.body.statements[0];
- let fn = assignment.expression;
-
- console.log(fn.parameters.map(param => param.data)); // [ 'a', 'b' ]
- */
