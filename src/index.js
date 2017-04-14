@@ -70,7 +70,7 @@ readFile(filePath)
     const tokens = ast.context.sourceTokens;
     tokens.forEach((token) => {
       if (token.type === lexer.SourceType.COMMENT) {
-        if (token.start === 0 && source[1] === '!') {
+        if (token.start === 0 && ast.context[1] === '!') {
           console.log('shebang comment', token);
         } else {
           console.log('line comment', token);
