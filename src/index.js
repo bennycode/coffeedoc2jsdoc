@@ -29,6 +29,19 @@ function writeFile(file, message) {
 
 const filePath = 'data/block-comment.coffee';
 
+function parseBlockComment(block) {
+  const BLOCK_COMMENT_DELIMITER = '###';
+  const LINE_SEPARATOR = '\n';
+
+  let innerBlock = block.substr(block.indexOf(LINE_SEPARATOR) + LINE_SEPARATOR.length);
+  innerBlock = innerBlock.substr(0, innerBlock.lastIndexOf(BLOCK_COMMENT_DELIMITER));
+
+  const array = innerBlock.split('\n');
+  for (let i in array) {
+    console.log(array[i]);
+  }
+}
+
 readFile(filePath)
   .then((code) => {
     const ast = parser.parse(code);
@@ -41,7 +54,9 @@ readFile(filePath)
           console.log('line comment', token);
         }
       } else if (token.type === lexer.SourceType.HERECOMMENT) {
-        console.log('block comment', token);
+        const {start, end} = token;
+        const block = code.substr(start, end);
+        parseBlockComment(block);
       }
     });
   })
