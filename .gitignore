@@ -1,0 +1,14 @@
+# WebStorm
+
+!/.idea/*.iml
+!/.idea/codeStyleSettings.xml
+!/.idea/misc.xml
+!/.idea/modules.xml
+!/.idea/vcs.xml
+!/.idea/watcherTasks.xml
+
+# Others
+/bower_components
+/coverage
+/node_modules
+/npm-debug.log*
