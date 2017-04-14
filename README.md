@@ -1,0 +1,1 @@
+# coffeedoc2jsdoc
