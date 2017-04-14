@@ -1,5 +1,5 @@
 # WebStorm
-
+/.idea
 !/.idea/*.iml
 !/.idea/codeStyleSettings.xml
 !/.idea/misc.xml
