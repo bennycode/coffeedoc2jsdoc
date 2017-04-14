@@ -4,6 +4,8 @@ Create a new conversation.
 
 @param user_ids [Array<String>] IDs of users (excluding the requestor) to be part of the conversation
 @param name [String] User defined name for the Conversation (optional)
+@see https://staging-nginz-https.zinfra.io/swagger-ui/#!/users/clearProperties
+@return [z.entity.Conversation] The conversation that was created
 ###
 create_new_conversation: (user_ids, name) =>
   @conversation_service.create_conversation user_ids, name
