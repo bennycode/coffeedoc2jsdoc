@@ -1,7 +1,7 @@
 {
   "description": "Converts CoffeeScript documentation into JavaScript documentation.",
-  "devDependencies": {
-    "decaffeinate-parser": "^17.0.0"
+  "dependencies": {
+    "decaffeinate-parser": "17.0.0"
   },
   "main": "src/index.js",
   "name": "coffeedoc2jsdoc",
@@ -10,7 +10,7 @@
     "url": "git://github.com/wireapp/coffeedoc2jsdoc.git"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node src/index.js"
   },
   "version": "0.0.0"
 }
