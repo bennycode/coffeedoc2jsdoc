@@ -7,7 +7,3 @@ Create a new conversation.
 @param name [String] User defined name for the Conversation (optional)
 @return [z.entity.Conversation] The conversation that was created
 ###
-create_new_conversation: (user_ids, name) =>
-  @conversation_service.create_conversation user_ids, name
-  .then (response) =>
-    @_on_create conversation: response.id, data: response
