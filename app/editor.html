@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="editor.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>js2coffee editor</title>
+  </head>
+  <body>
+    <div id="editor-wrapper">
+      <pre id="editor2" class="editor coffeescript">###
+Create a new conversation.
+@note Supply at least 2 user IDs! Do not include the requestor
+
+@param user_ids [Array&lt;String&gt;] IDs of users (excluding the requestor) to be part of the conversation
+@param name [String] User defined name for the Conversation (optional)
+@see https://staging-nginz-https.zinfra.io/swagger-ui/#!/users/clearProperties
+@return [z.entity.Conversation] The conversation that was created
+###</pre>
+      <pre id="editor1" class="editor javascript">/**
+ * Create a new conversation.
+ * @note Supply at least 2 user IDs! Do not include the requestor
+ *
+ * @param {Array&lt;String&gt;} user_ids - IDs of users (excluding the requestor) to be part of the conversation
+ * @param {String} name - User defined name for the Conversation (optional)
+ * @see https://staging-nginz-https.zinfra.io/swagger-ui/#!/users/clearProperties
+ * @returns {z.entity.Conversation} The conversation that was created
+ */</pre>
+    </div>
+    <script src="./ace/ace.js"></script>
+    <script src="./editor.js"></script>
+  </body>
+</html>

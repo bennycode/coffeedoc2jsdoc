@@ -1,0 +1,33 @@
+iframe {
+  border: 0;
+  height: 500px;
+  width: 100%;
+}
+
+* {
+  font-family: Arial;
+}
+
+html {
+  background-color: #4d362d;
+}
+
+h1 {
+  color: #d77d2d;
+  font-family: 'Alegreya', serif;
+  font-size: 28px;
+  text-align: center;
+}
+
+a {
+  color: #337799;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #3882a8;
+}
+
+body {
+  margin: 0;
+}
