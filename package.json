@@ -1,7 +1,12 @@
 {
   "description": "Converts CoffeeScript documentation into JavaScript documentation.",
   "dependencies": {
+    "browser-sync": "2.18.8",
     "decaffeinate-parser": "17.0.0"
+  },
+  "devDependencies": {
+    "gulp": "3.9.1",
+    "webpack": "2.3.3"
   },
   "main": "src/index.js",
   "name": "coffeedoc2jsdoc",
@@ -10,7 +15,9 @@
     "url": "git://github.com/wireapp/coffeedoc2jsdoc.git"
   },
   "scripts": {
-    "start": "node src/index.js"
+    "dist": "webpack --progress",
+    "dev": "gulp",
+    "start": "node src/node_sample.js"
   },
   "version": "0.0.0"
 }
