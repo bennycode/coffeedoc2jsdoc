@@ -1,31 +1,41 @@
 class TagLine {
   constructor(type, content) {
-    this.type = type;
     this.content = content;
+    this.type = type;
+    this.parameter = {
+      description: undefined,
+      name: undefined,
+      type: undefined
+    };
+    this.coffeeDoc = `${this.type} ${this.content}`;
+    this.jsDoc = this.getJSDoc();
   }
 
-  toCoffeeDoc() {
-    return `${this.type} ${this.content}`;
+  getCoffeeDoc() {
+    return this.coffeeDoc;
   }
 
-  toJSDoc() {
+  getJSDoc() {
     if (this.type == TagLine.TYPE.PARAM) {
       let currentPosition = this.content.indexOf(' ');
       let name = this.content.substr(0, currentPosition);
       name = name.trim();
+      this.parameter.name = name;
 
       currentPosition = this.content.indexOf('[') + 1;
       let paramType = this.content.substr(currentPosition);
       paramType = paramType.substr(0, paramType.indexOf(']'));
       paramType = paramType.trim();
+      this.parameter.type = paramType;
 
       let description = this.content.substr(this.content.indexOf(']') + 1);
       description = description.trim();
+      this.parameter.description = description;
 
-      let text = `${this.type} {${paramType}} ${name}`;
+      let text = `${this.type} {${this.parameter.type}} ${this.parameter.name}`;
 
       if (description) {
-        text += ` - ${description}`;
+        text += ` - ${this.parameter.description}`;
       }
 
       return text;
@@ -33,13 +43,15 @@ class TagLine {
       let paramType = this.content.substr(this.content.indexOf('[') + 1);
       paramType = paramType.substr(0, paramType.indexOf(']'));
       paramType = paramType.trim();
+      this.parameter.type = paramType;
 
       let description = this.content.substr(this.content.indexOf(']') + 1);
       description = description.trim();
+      this.parameter.description = description;
 
-      let text = `@returns {${paramType}}`;
+      let text = `@returns {${this.parameter.type}}`;
       if (description) {
-        text += ` ${description}`;
+        text += ` ${this.parameter.description}`;
       }
 
       return text;

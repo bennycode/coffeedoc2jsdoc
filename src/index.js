@@ -1,8 +1,9 @@
+const Comment = require('./jsdoc/Comment');
 const fs = require('fs');
 const lexer = require('coffee-lex');
 const parser = require('decaffeinate-parser');
 const path = require('path');
-const TagLine = require('./TagLine');
+const TagLine = require('./coffeedoc/TagLine');
 
 function readFile(file) {
   return new Promise((resolve, reject) => {
@@ -38,30 +39,22 @@ function parseBlockComment(block) {
   innerBlock = innerBlock.substr(0, innerBlock.lastIndexOf(BLOCK_COMMENT_DELIMITER));
   innerBlock = innerBlock.trim();
 
-  const contents = [];
+  const jsDocComment = new Comment(true);
 
   const array = innerBlock.split('\n');
   for (let i in array) {
     const line = array[i].trim();
+    let content = line;
 
     if (line.startsWith('@')) {
       const tagName = line.substr(0, line.indexOf(' '));
-      const content = new TagLine(tagName, line.substr(line.indexOf(' ') + 1));
-      if (content.toJSDoc()) {
-        contents.push(content.toJSDoc());
-        console.log(`CoffeeDoc: ${content.toCoffeeDoc()}`);
-        console.log(`JSDoc: ${content.toJSDoc()}`);
-      }
-    } else {
-      contents.push(line);
+      content = new TagLine(tagName, line.substr(line.indexOf(' ') + 1));
     }
+
+    jsDocComment.addContent(content);
   }
 
-  console.log('/**');
-  contents.forEach((content) => {
-    console.log(` * ${content}`);
-  });
-  console.log(' */');
+  return jsDocComment;
 }
 
 readFile(filePath)
@@ -78,7 +71,8 @@ readFile(filePath)
       } else if (token.type === lexer.SourceType.HERECOMMENT) {
         const {start, end} = token;
         const block = code.substr(start, end);
-        parseBlockComment(block);
+        const comment = parseBlockComment(block);
+        console.log(comment.getJSDoc());
       }
     });
   })
