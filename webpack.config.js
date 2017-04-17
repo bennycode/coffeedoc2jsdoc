@@ -14,6 +14,10 @@ module.exports = {
     libraryTarget: 'var',
     path: `${__dirname}/dist/window`,
   },
+  node: {
+    fs: 'empty',
+    crypto: 'empty',
+  },
   plugins: [
     new webpack.BannerPlugin(`${pkg.name} v${pkg.version}`),
   ],
