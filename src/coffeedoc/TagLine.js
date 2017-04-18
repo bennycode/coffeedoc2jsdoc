@@ -43,7 +43,7 @@ class TagLine {
       let paramType = this.content.substr(this.content.indexOf('[') + 1);
       paramType = paramType.substr(0, paramType.indexOf(']'));
       paramType = paramType.trim();
-      this.parameter.type = paramType;
+      this.parameter.type = paramType || 'undefined';
 
       let description = this.content.substr(this.content.indexOf(']') + 1);
       description = description.trim();

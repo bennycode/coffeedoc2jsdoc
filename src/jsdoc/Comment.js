@@ -10,7 +10,7 @@ class Comment {
     this.tail = ' */';
 
     this.tagParameters = [];
-    this.tagReturns = '@returns {undefined} No return value';
+    this.tagReturns = new TagLine(TagLine.TYPE.RETURN, 'No return value');
     this.tagOthers = [];
   }
 
@@ -39,20 +39,19 @@ class Comment {
     });
 
     this.tagOthers.sort((a, b) => {
-      return a.getJSDoc().localeCompare( b.getJSDoc());
+      return a.getJSDoc().localeCompare(b.getJSDoc());
     });
     this.tagOthers.forEach((content) => {
       text += `${lineSeparator} * ${content.getJSDoc()}`;
     });
 
-    if(this.tagParameters) {
-      text += `${lineSeparator} *`;
+    if (this.tagParameters) {
       this.tagParameters.forEach((content) => {
         text += `${lineSeparator} * ${content.getJSDoc()}`;
       });
     }
 
-    if(this.tagReturns) {
+    if (this.tagReturns) {
       text += `${lineSeparator} * ${this.tagReturns.getJSDoc()}`;
     }
 
