@@ -46,8 +46,6 @@ class Comment {
       this.tagOthers.forEach((content) => {
         text += `${lineSeparator} * ${content.getJSDoc()}`;
       });
-
-      text += `${lineSeparator} *`;
     }
 
     if (this.tagParameters) {
