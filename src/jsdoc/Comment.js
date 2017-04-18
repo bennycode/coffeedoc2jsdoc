@@ -10,7 +10,7 @@ class Comment {
     this.tail = ' */';
 
     this.tagParameters = [];
-    this.tagReturns = undefined;
+    this.tagReturns = '@returns {undefined} No return value';
     this.tagOthers = [];
   }
 
