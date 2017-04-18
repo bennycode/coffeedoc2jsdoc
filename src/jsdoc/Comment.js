@@ -38,12 +38,17 @@ class Comment {
       text += `${lineSeparator} * ${content}`;
     });
 
-    this.tagOthers.sort((a, b) => {
-      return a.getJSDoc().localeCompare(b.getJSDoc());
-    });
-    this.tagOthers.forEach((content) => {
-      text += `${lineSeparator} * ${content.getJSDoc()}`;
-    });
+    if(this.tagOthers) {
+      this.tagOthers.sort((a, b) => {
+        return a.getJSDoc().localeCompare(b.getJSDoc());
+      });
+
+      this.tagOthers.forEach((content) => {
+        text += `${lineSeparator} * ${content.getJSDoc()}`;
+      });
+
+      text += `${lineSeparator} *`;
+    }
 
     if (this.tagParameters) {
       this.tagParameters.forEach((content) => {

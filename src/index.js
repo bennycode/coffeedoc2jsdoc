@@ -32,21 +32,22 @@ function parseBlockComment(block) {
 module.exports = function(code) {
   const ast = parser.parse(code);
   const tokens = ast.context.sourceTokens;
-  let comment = undefined;
+  const comments = [];
 
   tokens.forEach((token) => {
     if (token.type === lexer.SourceType.COMMENT) {
       if (token.start === 0 && ast.context[1] === '!') {
-        console.log('shebang comment', token);
+        // console.log('shebang comment', token);
       } else {
-        console.log('line comment', token);
+        // console.log('line comment', token);
       }
     } else if (token.type === lexer.SourceType.HERECOMMENT) {
       const {start, end} = token;
       const block = code.substr(start, end);
-      comment = parseBlockComment(block);
+      const comment = parseBlockComment(block);
+      comments.push(comment);
     }
   });
 
-  return comment;
+  return comments;
 };

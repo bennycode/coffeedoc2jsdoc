@@ -15,8 +15,11 @@ function readFile(file) {
 
 readFile('data/block-comment.coffee')
   .then((code) => {
-    const comment = coffeedoc2jsdoc(code);
-    console.log(comment.getJSDoc());
+    const comments = coffeedoc2jsdoc(code);
+    comments.forEach((comment) => {
+      console.log(comment.getJSDoc());
+      console.log();
+    });
   })
   .catch(console.error);
 
