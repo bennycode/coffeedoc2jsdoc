@@ -30,8 +30,11 @@ describe('Converter', () => {
           const firstComment = comments[0];
           const secondComment = comments[1];
 
-          const expected = `/**\n * Construct a new asset for the asset service.\n * @param {Object} config - Asset configuration\n * @returns {undefined} No return value\n */`;
+          let expected = `/**\n * Construct a new asset for the asset service.\n * @param {Object} config - Asset configuration\n * @returns {undefined} No return value\n */`;
           expect(firstComment.getJSDoc()).toBe(expected);
+
+          expected = `/**\n * Sets the image payload of the asset.\n * @param {Object} image - Image object to be set on the asset entity\n * @returns {undefined} No return value\n */`;
+          expect(secondComment.getJSDoc()).toBe(expected);
 
           done();
         }
