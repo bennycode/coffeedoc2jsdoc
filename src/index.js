@@ -29,25 +29,30 @@ function parseBlockComment(block) {
   return jsDocComment;
 }
 
-module.exports = function(code) {
-  const ast = parser.parse(code);
-  const tokens = ast.context.sourceTokens;
-  const comments = [];
+module.exports = {
+  Comment: Comment,
+  Converter: {
+    toJSDoc: function(code) {
+      const ast = parser.parse(code);
+      const tokens = ast.context.sourceTokens;
+      const comments = [];
 
-  tokens.forEach((token) => {
-    if (token.type === lexer.SourceType.COMMENT) {
-      if (token.start === 0 && ast.context[1] === '!') {
-        // console.log('shebang comment', token);
-      } else {
-        // console.log('line comment', token);
-      }
-    } else if (token.type === lexer.SourceType.HERECOMMENT) {
-      const {start, end} = token;
-      const block = code.substr(start, end);
-      const comment = parseBlockComment(block);
-      comments.push(comment);
+      tokens.forEach((token) => {
+        if (token.type === lexer.SourceType.COMMENT) {
+          if (token.start === 0 && ast.context[1] === '!') {
+            // console.log('shebang comment', token);
+          } else {
+            // console.log('line comment', token);
+          }
+        } else if (token.type === lexer.SourceType.HERECOMMENT) {
+          const {start, end} = token;
+          const block = code.substr(start, end);
+          const comment = parseBlockComment(block);
+          comments.push(comment);
+        }
+      });
+      return comments;
     }
-  });
-
-  return comments;
+  },
+  TagLine: TagLine,
 };

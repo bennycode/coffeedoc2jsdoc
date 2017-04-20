@@ -13,9 +13,9 @@ function readFile(file) {
   });
 }
 
-readFile('data/block-comment.coffee')
+readFile('samples/sample-1.coffee')
   .then((code) => {
-    const comments = coffeedoc2jsdoc(code);
+    const comments = coffeedoc2jsdoc.Converter.toJSDoc(code);
     comments.forEach((comment) => {
       console.log(comment.getJSDoc());
       console.log();
