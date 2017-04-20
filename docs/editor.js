@@ -51,10 +51,27 @@ window.onload = () => {
 
   const generateJSDoc = () => {
     try {
-      const input = editor2.getSession().getDocument().getValue();
-      console.warn('JavaScript', input);
-      const jsOutput = 'test';
-      editor1.getSession().getDocument().setValue(jsOutput);
+      const coffeeDoc = editor2.getSession().getDocument().getValue();
+
+      const url = 'http://localhost:8080/convert';
+      const payload = JSON.stringify({code: coffeeDoc});
+      const headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+      const options = {
+        body: payload,
+        headers: headers,
+        method: 'POST'
+      };
+      const request = new Request(url, options);
+
+      window
+        .fetch(request)
+        .then(response => response.text())
+        .then((jsDoc) => {
+          editor1.getSession().getDocument().setValue(jsDoc);
+        });
+
     } catch (error) {
       console.error(error);
     }
