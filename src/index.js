@@ -1,6 +1,7 @@
-const Comment = require('./jsdoc/Comment');
 const lexer = require('coffee-lex');
 const parser = require('decaffeinate-parser');
+
+const Comment = require('./jsdoc/Comment');
 const TagLine = require('./coffeedoc/TagLine');
 
 function parseBlockComment(block) {

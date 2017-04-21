@@ -1,14 +1,11 @@
 const bodyParser = require('body-parser');
 const coffeedoc2jsdoc = require('./index');
-const cors = require('cors');
 const express = require('express');
 const path = require('path');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors());
 app.use(express.static('public'));
-app.options('*', cors());
 
 app.post('/convert', (request, response) => {
   const code = request.body.code;

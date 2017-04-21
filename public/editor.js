@@ -53,7 +53,7 @@ window.onload = () => {
     try {
       const coffeeDoc = editor2.getSession().getDocument().getValue();
 
-      const url = 'http://localhost:8080/convert';
+      const url = './convert';
       const payload = JSON.stringify({code: coffeeDoc});
       const headers = new Headers({
         'Content-Type': 'application/json'
