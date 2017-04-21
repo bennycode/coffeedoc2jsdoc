@@ -7,6 +7,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+const port = process.env.PORT || 8080;
+
 app.post('/convert', (request, response) => {
   const code = request.body.code;
 
@@ -33,7 +35,7 @@ app.get('/', function(request, response) {
   response.sendFile('public/index.html');
 });
 
-const server = app.listen(8080, () => {
+const server = app.listen(port, () => {
   const port = server.address().port;
   console.log(`Server is running on http://localhost:${port}/`);
 });
