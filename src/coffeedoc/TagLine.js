@@ -15,6 +15,18 @@ class TagLine {
     return this.coffeeDoc;
   }
 
+  lintParamType(type) {
+    if (['Boolean', 'Number', 'String'].includes(type)) {
+      type = type.toLowerCase();
+    }
+
+    if (type.toLowerCase() === 'integer') {
+      type = 'number';
+    }
+
+    return type;
+  }
+
   getJSDoc() {
     if (this.type == TagLine.TYPE.PARAM) {
       let currentPosition = this.content.indexOf(' ');
@@ -26,7 +38,7 @@ class TagLine {
       let paramType = this.content.substr(currentPosition);
       paramType = paramType.substr(0, paramType.indexOf(']'));
       paramType = paramType.trim();
-      this.parameter.type = paramType;
+      this.parameter.type = this.lintParamType(paramType);
 
       let description = this.content.substr(this.content.indexOf(']') + 1);
       description = description.trim();
@@ -43,7 +55,8 @@ class TagLine {
       let paramType = this.content.substr(this.content.indexOf('[') + 1);
       paramType = paramType.substr(0, paramType.indexOf(']'));
       paramType = paramType.trim();
-      this.parameter.type = paramType || 'undefined';
+      paramType = paramType || 'undefined';
+      this.parameter.type = this.lintParamType(paramType);
 
       let description = this.content.substr(this.content.indexOf(']') + 1);
       description = description.trim();

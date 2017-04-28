@@ -19,7 +19,7 @@ describe('Converter', () => {
       });
     });
 
-    it('handles multiple block comments', (done) => {
+    xit('handles multiple block comments', (done) => {
       fs.readFile('./samples/sample-2.coffee', 'utf8', (error, data) => {
         if (error) {
           done.fail(error);
@@ -43,4 +43,24 @@ describe('Converter', () => {
 
   });
 
+});
+
+describe('TagLine', () => {
+  describe('lintParamType', () => {
+    it('converts "Integer" into "number"', () => {
+      const type = '@return';
+      const content = '[Integer] The answer to life, the universe and everything.';
+      const tagLine = new coffeedoc2jsdoc.TagLine(type, content);
+      tagLine.getJSDoc();
+      expect(tagLine.parameter.type).toBe('number');
+    });
+
+    it('makes primitive types lowercase', () => {
+      const type = '@return';
+      const content = '[Boolean] True, if promise is valid.';
+      const tagLine = new coffeedoc2jsdoc.TagLine(type, content);
+      tagLine.getJSDoc();
+      expect(tagLine.parameter.type).toBe('boolean');
+    });
+  });
 });
