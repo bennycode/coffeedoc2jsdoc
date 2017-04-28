@@ -16,15 +16,13 @@ class TagLine {
   }
 
   lintParamType(type) {
-    if (['Boolean', 'Number', 'String'].includes(type)) {
-      type = type.toLowerCase();
-    }
-
-    if (type.toLowerCase() === 'integer') {
-      type = 'number';
-    }
-
-    return type;
+    return type
+      .replace('Boolean', 'boolean')
+      .replace('Integer', 'number')
+      .replace('integer', 'number')
+      .replace('Number', 'number')
+      .replace('String', 'string')
+      ;
   }
 
   getJSDoc() {

@@ -62,5 +62,13 @@ describe('TagLine', () => {
       tagLine.getJSDoc();
       expect(tagLine.parameter.type).toBe('boolean');
     });
+
+    it('converts primitive types in array declarations', () => {
+      const type = '@param';
+      const content = 'user_ids [Array<String>] IDs of users (excluding the requestor) to be part of the conversation';
+      const tagLine = new coffeedoc2jsdoc.TagLine(type, content);
+      tagLine.getJSDoc();
+      expect(tagLine.parameter.type).toBe('Array<string>');
+    });
   });
 });
